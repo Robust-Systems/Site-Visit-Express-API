@@ -1,5 +1,5 @@
 {
-  "name": "Site Visit Express API",
+  "name": "site-visit-express-api",
   "version": "1.0.0",
   "description": "API resources to return site visits over a given period.",
   "main": "server.js",
