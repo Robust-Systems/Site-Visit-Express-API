@@ -1,0 +1,33 @@
+{
+  "name": "Site Visit Express API",
+  "version": "1.0.0",
+  "description": "API resources to return site visits over a given period.",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "test-coverage": "npm test && istanbul cover node_modules/mocha/bin/_mocha -- -R spec",
+    "install-local": "npm install -g mocha & npm install -g node-inspector & npm install",
+    "start": "node server.js 1 prod 127.0.0.1 3000 9000",
+    "debug": "node-debug server.js 0 dev 127.0.0.1 3000 9000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Site Visit Express API"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "Iftikhar Siddique",
+  "license": "",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^8.2.1",
+    "sinon": "^9.2.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cluster-service": "^2.1.4",
+    "express": "^4.17.1"
+  }
+}
