@@ -1,0 +1,19 @@
+{
+  "name": "site-visit-express-api",
+  "version": "1.0.0",
+  "description": "API resources to return site visits over a given period.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Robust-Systems/site-visit-express-api.git"
+  },
+  "author": "Iftikhar Siddique",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Robust-Systems/site-visit-express-api/issues"
+  },
+  "homepage": "https://github.com/Robust-Systems/site-visit-express-api#readme"
+}
