@@ -9,6 +9,7 @@ class SiteVisitService {
     this.Initialise();
   }
 
+  // load JSON file into JavaScript objects array
   Initialise() {
     var file = fs.readFileSync(this.JsonDataFile, "utf8");
     var data = JSON.parse(file);
@@ -28,7 +29,7 @@ class SiteVisitService {
   }
 
   /*
-  Provide average site visits for a given date
+  Provide average site visits for a given date (if no to date)
   Provide average site visits given a date range (from and to).
   */
   AverageSiteVisitsByDate(dateFrom, dateTo) {
@@ -61,12 +62,6 @@ class SiteVisitService {
     return avgVisits;
   }
 
-  /*
-  Provide an array of key-value pairs, with key being the date and value being an array of
-  sites that have site visits for that date
-  */
-
-
   isWithinDates(dateVisitedSite, objDateFrom, objDateTo) {
     if (!objDateTo) {
       return dateVisitedSite.getTime() === objDateFrom.getTime();
@@ -80,6 +75,32 @@ class SiteVisitService {
     }
 
     return false;
+  }
+
+  /*
+  Provide an array of key-value pairs, with key being the date and value being an array of
+  sites that have site visits for that date
+  */
+  GetSitesGroupedByDate() {
+    let dateVisitedArr = {};
+    for (var i = 0; i < this.SiteVistArr.length; i++) {
+      let dateVisitedStr = this.SiteVistArr[i].dateVisited.substring(0, 10);
+
+      if (!dateVisitedArr[dateVisitedStr]) {
+        dateVisitedArr[dateVisitedStr] = [];
+      }
+      dateVisitedArr[dateVisitedStr].push(this.SiteVistArr[i].domain);
+    }
+
+    let groupedArr = [];
+    for (var dateVisitedStr in dateVisitedArr) {
+      groupedArr.push({
+        dateVisited: dateVisitedStr,
+        domain: dateVisitedArr[dateVisitedStr],
+      });
+    }
+
+    return groupedArr;
   }
 }
 

@@ -1,3 +1,4 @@
+// class used to map the JSON file data
 class SiteVisit {
    constructor(id, domain, visitors, dateVisited) {
        this.id = id;

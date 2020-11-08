@@ -1,16 +1,14 @@
 global.__basedir = __dirname;
 
-//console.log(__basedir);
-
 var express = require('Express');
 var app = express();
+var sitesRouter = require('./sites-router');
 
-var things = require('./things.js');
+app.use('/sites', sitesRouter);
 
-//both index.js and things.js should be in same directory
-app.use('/things', things);
-
-//app.listen(3000);
+app.get('*', function(req, res){
+  res.send('Sorry, this is an invalid URL.');
+});
 
 app.listen(3000, () =>
   console.log("API running on http://localhost:3000")
