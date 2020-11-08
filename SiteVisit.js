@@ -1,5 +1,3 @@
-const moment = require("moment");
-
 class SiteVisit {
    constructor(id, domain, visitors, dateVisited) {
        this.id = id;
