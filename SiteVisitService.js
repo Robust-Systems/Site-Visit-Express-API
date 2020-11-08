@@ -28,20 +28,58 @@ class SiteVisitService {
   }
 
   /*
-  1. Provide average site visits for a given date
-  2. Provide average site visits given a date range (from and to).
-  3. Provide an array of key-value pairs, with key being the date and value being an array of
-     sites that have site visits for that date
+  Provide average site visits for a given date
+  Provide average site visits given a date range (from and to).
   */
-  AverageSiteVisitsByDate() {
-    let objDate = new Date('2019-12-09');
-    let newArray = this.SiteVistArr.filter(function (el) {
-      return (
-        el.dateOnlyVisited.getTime() === objDate.getTime()
-      );
-    });
+  AverageSiteVisitsByDate(dateFrom, dateTo) {
+    let objDateFrom = new Date(dateFrom);
+    objDateFrom.setHours(0, 0, 0, 0);
 
-    return newArray;
+    let objDateTo = null;
+    if (dateTo) {
+      objDateTo = new Date(dateTo);
+      objDateTo.setHours(0, 0, 0, 0);
+    }
+
+    let totalVisits = 0;
+    let sites = 0;
+    for (var i = 0; i < this.SiteVistArr.length; i++) {
+      if (
+        this.isWithinDates(
+          this.SiteVistArr[i].dateOnlyVisited,
+          objDateFrom,
+          objDateTo
+        )
+      ) {
+        totalVisits += this.SiteVistArr[i].visitors;
+        sites++;
+      }
+    }
+
+    let avgVisits = totalVisits / sites || 0;
+
+    return avgVisits;
+  }
+
+  /*
+  Provide an array of key-value pairs, with key being the date and value being an array of
+  sites that have site visits for that date
+  */
+
+
+  isWithinDates(dateVisitedSite, objDateFrom, objDateTo) {
+    if (!objDateTo) {
+      return dateVisitedSite.getTime() === objDateFrom.getTime();
+    }
+
+    if (
+      dateVisitedSite.getTime() >= objDateTo.getTime() &&
+      dateVisitedSite.getTime() <= objDateTo.getTime()
+    ) {
+      return true;
+    }
+
+    return false;
   }
 }
 
