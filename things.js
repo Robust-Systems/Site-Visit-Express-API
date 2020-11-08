@@ -1,7 +1,31 @@
 var express = require('express');
 var router = express.Router();
+var fs = require("fs");
+const SiteVisit = require('./SiteVisit');
+
+router.use((req, res, next) => {
+   res.set('Cache-Control', 'no-store')
+   next()
+ });
 
 router.get('/', function(req, res){
+   console.log("A new request received at " + Date.now());
+   console.log(__dirname);
+   console.log(__filename);
+   console.log(__basedir);
+
+   var file = fs.readFileSync('data.json', 'utf8');
+   var data = JSON.parse(file);
+   var siteVistArr = [];
+
+   for(var i = 0; i < data.length; i++) {
+      let obj = data[i];
+      let siteVisit = new SiteVisit(obj.id.$oid, obj.domain, obj.visitors, obj.date);
+      siteVistArr.push(siteVisit);
+
+      console.log(obj.id);
+  }
+  
    res.send('GET route on things.');
 });
 
